@@ -2,17 +2,21 @@ import React from 'react';
 import { BrowserRouter as Router, Routes } from 'react-router-dom';
 import Navbar from './views/Navbar'
 
-import './App.css';
+import { AuthProvider } from './context/AuthContext'
+
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <AuthProvider>
         <Navbar />
         <Routes>
      
         </Routes>
-      </div>
+      </AuthProvider>
+      
     </Router>
   );
 }
