@@ -1,16 +1,21 @@
-import React from 'react'
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
-import PrivateRoute from "./utils/PrivateRoute"
-import { AuthProvider} from "./context/AuthContext"
+import React from 'react';
+import { BrowserRouter as Router, Routes } from 'react-router-dom';
+import Navbar from './views/Navbar'
 
-import Homepage from  "./views/Homepage"
-import Registerpage from  "./views/Registerpage"
-import Loginpage from  "./views/Loginpage"
-import Dashboard from  "./views/Dashboard"
-import Navbar from  "./views/Navbar"
+import './App.css';
 
 function App() {
-
+  return (
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Routes>
+     
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
+
