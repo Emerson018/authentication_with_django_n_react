@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 
@@ -6,18 +6,20 @@ import AuthContext from '../context/AuthContext'
 
 function Loginpage() {
 
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
   const {loginUser} = useContext(AuthContext)
-  const handleSubmit = e => {
+  
+  console.log(email);
+  console.log(password);
+
+  const handleSubmit = async e => {
     e.preventDefault()
-    const email = e.target.email.value
-    const password = e.target.password.value
-
-    email.length > 0 && loginUser(email, password)
-
-    console.log(email)
-    console.log(password)
-   
+    loginUser(email, password)
   }
+
+
 
   return (
     <div>
@@ -64,6 +66,7 @@ function Loginpage() {
                         id="form2Example17"
                         className="form-control form-control-lg"
                         name='email'
+                        onChange={e => setEmail(e.target.value)}
                       />
                       <label className="form-label" htmlFor="form2Example17">
                         Email address
@@ -75,6 +78,7 @@ function Loginpage() {
                         id="form2Example27"
                         className="form-control form-control-lg"
                         name='password'
+                        onChange={e => setPassword(e.target.value)}
                       />
                       <label className="form-label" htmlFor="form2Example27">
                         Password
