@@ -24,7 +24,7 @@ function Dashboard() {
           setRes(response.data.response)
         } catch (error) {
           console.log(error);
-          setRes("Something went wrong")
+          setRes("Algo deu errado!")
         }
       }
       fetchData()
@@ -38,7 +38,7 @@ function Dashboard() {
           setRes(response.data.response)
         } catch (error) {
           console.log(error);
-          setRes("Something went wrong")
+          setRes("Algo deu errado!!!!!!!")
         }
       }
       fetchPostData()

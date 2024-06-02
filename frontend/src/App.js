@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Navbar from './views/Navbar';
+import Navbar from './views/TopNavbar';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './utils/PrivateRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,6 +14,7 @@ function App() {
     <Router>
       <AuthProvider>
         <Navbar />
+        
         <Routes>
           <Route path="/login" element={<Loginpage />} />
           <Route path="/register" element={<Registerpage />} />

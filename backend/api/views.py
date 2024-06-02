@@ -19,14 +19,13 @@ class RegisterView(generics.CreateAPIView):
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
-def dashboard(request):
-    if request.method == "GET":
-        response = f"Eae {request.user}, o GET funcionou!"
-        return Response({'response': response}, status=status.HTTP_200_OK)
-    elif request.method == "POST":
-        text = request.POST.get("text")
-        response = f"Hey {request.user}, o texto é: {text}"
-        return Response({'response': response}, status=status.HTTP_200_OK)
-    
-    return Response({},status=status.HTTP_404_BAD_REQUEST)
+def testEndPoint(request):
+    if request.method == 'GET':
+        data = f"Boa {request.user}, a API respondeu ao GET request."
+        return Response({'response': data}, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        text = "'Hello World!'"
+        data = f'Dale, a API respondeu ao POST request com o texto: {text}'
+        return Response({'response': data}, status=status.HTTP_200_OK)
+    return Response({}, status.HTTP_400_BAD_REQUEST)
     
