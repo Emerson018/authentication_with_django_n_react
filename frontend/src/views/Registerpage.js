@@ -1,28 +1,58 @@
-import {useState, useContext} from 'react'
-import { Link } from 'react-router-dom'
-import AuthContext from '../context/AuthContext'
-
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
+const swal = require('sweetalert2');
 
 function Registerpage() {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
 
-  const [email, setEmail] = useState("")
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [password2, setPassword2] = useState("")
-
-  const {registerUser} = useContext(AuthContext)
-
-  console.log(email);
-  console.log(username);
-  console.log(password);
-  console.log(password2);
-
+  const { registerUser } = useContext(AuthContext);
 
   const handleSubmit = async e => {
-    e.preventDefault()
-    registerUser(email, username, password, password2)
-  }
-  
+    e.preventDefault();
+
+    // Verificação básica de dados
+    if (!email || !username || !password || !password2) {
+      swal.fire({
+        title: "Todos os campos são obrigatórios.",
+        icon: "error",
+        toast: true,
+        timer: 6000,
+        position: 'top-right',
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+      return;
+    }
+    if (password !== password2) {
+      swal.fire({
+        title: "As senhas não coincidem.",
+        icon: "error",
+        toast: true,
+        timer: 6000,
+        position: 'top-right',
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+      return;
+    }
+
+    const errorMessage = await registerUser(email, username, password, password2);
+    if (errorMessage) {
+      swal.fire({
+        title: errorMessage,
+        icon: "error",
+        toast: true,
+        timer: 6000,
+        position: 'top-right',
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+    }
+  };
 
   return (
     <div>
@@ -75,7 +105,6 @@ function Registerpage() {
                               className="form-control form-control-lg"
                               placeholder="Username"
                               onChange={e => setUsername(e.target.value)}
-
                             />
                           </div>
                           <div className="form-outline mb-4">
@@ -85,7 +114,6 @@ function Registerpage() {
                               className="form-control form-control-lg"
                               placeholder="Password"
                               onChange={e => setPassword(e.target.value)}
-
                             />
                           </div>
                           <div className="form-outline mb-4">
@@ -95,7 +123,6 @@ function Registerpage() {
                               className="form-control form-control-lg"
                               placeholder="Confirm Password"
                               onChange={e => setPassword2(e.target.value)}
-
                             />
                           </div>
                           <div className="pt-1 mb-4">
@@ -143,10 +170,9 @@ function Registerpage() {
           </div>
           {/* Copyright */}
         </footer>
-    </>
-
+      </>
     </div>
-  )
+  );
 }
 
-export default Registerpage
+export default Registerpage;

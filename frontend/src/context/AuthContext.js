@@ -5,7 +5,7 @@ const swal = require('sweetalert2')
 
 const AuthContext = createContext();
 
-export default AuthContext
+export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
     const [authTokens, setAuthTokens] = useState(() =>
@@ -13,14 +13,12 @@ export const AuthProvider = ({ children }) => {
             ? JSON.parse(localStorage.getItem("authTokens"))
             : null
     );
-    
 
-    const [user, setUser] = useState(() => 
+    const [user, setUser] = useState(() =>
         localStorage.getItem("authTokens")
             ? jwtDecode(localStorage.getItem("authTokens"))
             : null
     );
-
 
     const [loading, setLoading] = useState(true);
 
@@ -29,120 +27,116 @@ export const AuthProvider = ({ children }) => {
     const loginUser = async (email, password) => {
         const response = await fetch("http://127.0.0.1:8000/api/token/", {
             method: "POST",
-            headers:{
-                "Content-Type":"application/json"
+            headers: {
+                "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                email, password
-            })
-        })
-        const data = await response.json()
+            body: JSON.stringify({ email, password })
+        });
+        const data = await response.json();
         console.log(data);
 
-        if(response.status === 200){
+        if (response.status === 200) {
             console.log("Logged In");
-            setAuthTokens(data)
-            setUser(jwtDecode(data.access))
-            localStorage.setItem("authTokens", JSON.stringify(data))
-            navigate("/")
+            setAuthTokens(data);
+            setUser(jwtDecode(data.access));
+            localStorage.setItem("authTokens", JSON.stringify(data));
+            navigate("/");
             swal.fire({
-                title: "Login Successful",
+                title: "Login Realizado!",
                 icon: "success",
                 toast: true,
                 timer: 6000,
                 position: 'top-right',
                 timerProgressBar: true,
                 showConfirmButton: false,
-            })
-
-        } else {    
+            });
+        } else {
             console.log(response.status);
             console.log("there was a server issue");
             swal.fire({
-                title: "Username or passowrd does not exists",
+                title: "Username or password does not exist",
                 icon: "error",
                 toast: true,
                 timer: 6000,
                 position: 'top-right',
                 timerProgressBar: true,
                 showConfirmButton: false,
-            })
+            });
         }
-    }
+    };
 
     const registerUser = async (email, username, password, password2) => {
         const response = await fetch("http://127.0.0.1:8000/api/register/", {
             method: "POST",
             headers: {
-                "Content-Type":"application/json"
+                "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                email, username, password, password2
-            })
-        })
-        if(response.status === 201){
-            navigate("/login")
+            body: JSON.stringify({ email, username, password, password2 })
+        });
+        const data = await response.json();
+
+        if (response.status === 201) {
+            navigate("/login");
             swal.fire({
-                title: "Registration Successful, Login Now",
+                title: "Registro realizado com sucesso! Faça seu login.",
                 icon: "success",
                 toast: true,
                 timer: 6000,
                 position: 'top-right',
                 timerProgressBar: true,
                 showConfirmButton: false,
-            })
+            });
         } else {
-            console.log(response.status);
-            console.log("there was a server issue");
-            swal.fire({
-                title: "An Error Occured " + response.status,
-                icon: "error",
-                toast: true,
-                timer: 6000,
-                position: 'top-right',
-                timerProgressBar: true,
-                showConfirmButton: false,
-            })
+            console.log("Response Status:", response.status);
+            console.log("Error data:", data);
+
+            let errorMessage = "An error occurred.";
+            if (data.email) {
+                errorMessage = data.email[0];  // Email already exists
+            } else if (data.password) {
+                errorMessage = data.password[0];  // Passwords do not match or other password validations
+            }
+
+            return errorMessage;
         }
-    }
+    };
 
     const logoutUser = () => {
-        setAuthTokens(null)
-        setUser(null)
-        localStorage.removeItem("authTokens")
-        navigate("/login")
+        setAuthTokens(null);
+        setUser(null);
+        localStorage.removeItem("authTokens");
+        navigate("/login");
         swal.fire({
-            title: "YOu have been logged out...",
+            title: "Você deslogou.",
             icon: "success",
             toast: true,
             timer: 6000,
             position: 'top-right',
             timerProgressBar: true,
             showConfirmButton: false,
-        })
-    }
+        });
+    };
 
     const contextData = {
-        user, 
+        user,
         setUser,
         authTokens,
         setAuthTokens,
         registerUser,
         loginUser,
         logoutUser,
-    }
+    };
 
     useEffect(() => {
         if (authTokens) {
-            setUser(jwtDecode(authTokens.access))
+            setUser(jwtDecode(authTokens.access));
         }
-        setLoading(false)
-    }, [authTokens, loading])
+        setLoading(false);
+    }, [authTokens, loading]);
 
     return (
         <AuthContext.Provider value={contextData}>
             {loading ? null : children}
         </AuthContext.Provider>
-    )
-
-}
+    );
+};
