@@ -38,7 +38,7 @@ function Dashboard() {
           setRes(response.data.response)
         } catch (error) {
           console.log(error);
-          setRes("Algo deu errado!!!!!!!")
+          setRes("Algo deu errado!!!")
         }
       }
       fetchPostData()
@@ -62,7 +62,7 @@ function Dashboard() {
             <li className="nav-item">
               <a className="nav-link" href="#">
                 <span data-feather="file" />
-                Orders
+                Consumo Energético
               </a>
             </li>
             <li className="nav-item">

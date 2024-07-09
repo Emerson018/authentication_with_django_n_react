@@ -1,12 +1,12 @@
 from django.shortcuts import render
 
-from api.models import User
-from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer
+from api.models import User, Consumo_eletrica
+from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, ConsumoEletricaSerializer
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import generics, status
+from rest_framework import generics, status, viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -28,4 +28,7 @@ def testEndPoint(request):
         data = f'Dale, a API respondeu ao POST request com o texto: {text}'
         return Response({'response': data}, status=status.HTTP_200_OK)
     return Response({}, status.HTTP_400_BAD_REQUEST)
-    
+
+class ConsumoEletricaList(generics.ListAPIView):
+    queryset = Consumo_eletrica.objects.all()
+    serializer_class = ConsumoEletricaSerializer

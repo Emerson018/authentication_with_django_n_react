@@ -34,12 +34,9 @@ post_save.connect(save_user_profile, sender=User)
 
 
 class Consumo_eletrica(models.Model):
-    ano = models.IntegerField()
-    mes = models.IntegerField()
-    sigla_uf = models.CharField()
+    ano = models.IntegerField(max_length=4)
+    mes = models.IntegerField(max_length=2)
+    sigla_uf = models.CharField(max_length=3)
     tipo_consumo = models.CharField(max_length=20)
-    numero_consumidores = models.IntegerField()
+    numero_consumidores = models.IntegerField(max_length=12)
     consumo = models.FloatField(max_length=12)
-
-#pra rodar o app IMPORTAR_CONSUMO.PY :
-#python manage.py importar_consumo C:\Users\Gamer-PC\Downloads\ALURA\Python\Django\asd\authentication_with_django_n_react\backend\api\management\commands\consumo_eletrico.csv

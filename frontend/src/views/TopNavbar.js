@@ -41,11 +41,14 @@ function TopNavbar() {
             <>
               <Nav.Link 
                 as={Link} 
-                to="/dashboard">Dashboard</Nav.Link>
+                to="/dashboard">Dashboard
+              </Nav.Link>
+
               <Nav.Link
                 onClick={logoutUser} 
                 as={Link} 
-                to="/logout">Logout</Nav.Link>
+                to="/logout">Logout
+              </Nav.Link>
             </>
             }
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
@@ -59,6 +62,10 @@ function TopNavbar() {
                 Separated link
               </NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link
+              as={Link} 
+              to="/getdata">dadosAPI
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
