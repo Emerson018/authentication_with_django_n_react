@@ -9,6 +9,7 @@ import Registerpage from './views/Registerpage';
 import Homepage from './views/Homepage';
 import Dashboard from './views/Dashboard';
 import Getdata from './views/Getdata';
+import ChartPage from './views/ChartPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Loginpage />} />
           <Route path="/register" element={<Registerpage />} />
           <Route path="/getdata" element={<Getdata />} />
+          <Route path="/chartpage" element={<ChartPage />} />
           <Route path="/" element={<Homepage />} />
 
           {/* Rota privada */}

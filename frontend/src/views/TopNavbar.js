@@ -66,6 +66,10 @@ function TopNavbar() {
               as={Link} 
               to="/getdata">dadosAPI
             </Nav.Link>
+            <Nav.Link
+              as={Link} 
+              to="/chartpage">Gráficos
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
