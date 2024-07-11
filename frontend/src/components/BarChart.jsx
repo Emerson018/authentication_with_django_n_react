@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import '../../src/App.css';
-import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import axios from 'axios';
 
 const GraficoEstadosSul = () => {
     const [dadosConsumo, setDadosConsumo] = useState([]);
-    const [dadosMaxConsumo, setDadosMaxConsumo] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -56,12 +55,12 @@ const GraficoEstadosSul = () => {
     return (
         <div>
             <h2>Gráfico dos Estados do Sul</h2>
-            <AreaChartComponent dados={dadosConsumo} />
+            <BarChartComponent dados={dadosConsumo} />
         </div>
     );
 };
 
-const AreaChartComponent = ({ dados }) => {
+const BarChartComponent = ({ dados }) => {
     // Verifique se os dados foram carregados
     if (dados.length === 0) {
         return <div>Carregando...</div>;
@@ -69,40 +68,42 @@ const AreaChartComponent = ({ dados }) => {
 
     return (
         <ResponsiveContainer width="100%" height={400}>
-            <AreaChart data={dados}>
+            <BarChart data={dados}>
                 <YAxis />
                 <XAxis dataKey="sigla_uf" />
                 <CartesianGrid strokeDasharray="5 5" />
                 <Tooltip content={<CustomTooltip />} />
                 <Legend />
-                <Area 
-                    type="monotone" 
-                    dataKey="quantidade" 
-                    stroke='#2563eb'
-                    fill='#3b82f6' />
-                <Area 
+                <Bar 
                     type="monotone" 
                     dataKey="max_consumo" 
                     stroke='#ff6b6b'
                     fill='#f87171' />
-            </AreaChart>
+            </BarChart>
         </ResponsiveContainer>
     );
 };
 
+const formatarValor = (valor) => {
+    if (valor >= 1000000) {
+        return (valor / 1000000).toFixed(1) + 'M'; // Formata como 'X.XM'
+    } else if (valor >= 1000) {
+        return (valor / 1000).toFixed(1) + 'K'; // Formata como 'X.XK'
+    } else {
+        return valor.toString(); // Retorna o valor original se for menor que 1000
+    }
+};
+
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-        
+        const valorConsumo = payload[0].value;
+        const valorFormatado = formatarValor(valorConsumo);
         return (
             <div className="p-3 bg-secondary rounded">
-                <p className="text-medium text-lg">{label}</p>
-                <p className="text-sm text-blue-400">
-                    Consumo:
-                    <span className="ml-2">${payload[0].value}</span>
-                </p>
+                <p className="text-medium text-lg">{label}</p>   
                 <p className="text-sm text-red-400">
-                    Maior Consumo:
-                    <span className="ml-2">${payload[1].value}</span>
+                    Consumo:
+                    <span className="ml-2">{valorFormatado}</span>
                 </p>
             </div>
         );
