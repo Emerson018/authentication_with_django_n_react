@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import AbstractUser
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class User(AbstractUser):
     username = models.CharField(max_length=100)
@@ -40,3 +40,13 @@ class Consumo_eletrica(models.Model):
     tipo_consumo = models.CharField(max_length=20)
     numero_consumidores = models.IntegerField(max_length=12)
     consumo = models.FloatField(max_length=12)
+
+class Produtos_tecnologia(models.Model):
+    produto = models.CharField(max_length=15)
+    preco = models.FloatField()
+    total_vendas = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(1000)])
+    avaliacao = models.FloatField(validators=[MinValueValidator(1.0), MaxValueValidator(5.0)])
+    data_venda = models.DateField()
+    tipo_produto = models.CharField(max_length=25)
+    marca = models.CharField(max_length=25)
+    garantia = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(36)])

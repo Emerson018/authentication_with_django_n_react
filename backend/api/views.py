@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from api.models import User, Consumo_eletrica
-from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, ConsumoEletricaSerializer
+from api.models import User, Consumo_eletrica, Produtos_tecnologia
+from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, ConsumoEletricaSerializer, ProdutosTecnologiaSerializer
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -32,6 +32,8 @@ def testEndPoint(request):
         return Response({'response': data}, status=status.HTTP_200_OK)
     return Response({}, status.HTTP_400_BAD_REQUEST)
 
+#dados da eletrica
+
 class ConsumoEletricaList(generics.ListAPIView):
     queryset = Consumo_eletrica.objects.all()
     serializer_class = ConsumoEletricaSerializer
@@ -47,3 +49,9 @@ def get_max_consumo_estados_sul(request):
 
     dados = list(max_consumo)
     return JsonResponse(dados, safe=False)
+
+#dados de produtos de tecnologia
+
+class ProdutosTecnologiaList(generics.ListAPIView):
+    queryset = Produtos_tecnologia.objects.all()
+    serializer_class = ProdutosTecnologiaSerializer

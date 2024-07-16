@@ -1,4 +1,4 @@
-from api.models import User, Consumo_eletrica
+from api.models import User, Consumo_eletrica, Produtos_tecnologia
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
@@ -62,4 +62,9 @@ class RegisterSerializer(serializers.ModelSerializer):
 class ConsumoEletricaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Consumo_eletrica
+        fields = '__all__'
+
+class ProdutosTecnologiaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Produtos_tecnologia
         fields = '__all__'
