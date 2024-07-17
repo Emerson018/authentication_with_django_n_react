@@ -1,6 +1,7 @@
 import React from "react";
 import AreaChart from "../components/AreaChart";
 import BarChart from "../components/BarChart";
+import TreeMap from "../components/TreeMap";
 
 const Charts = () => {
 
@@ -10,6 +11,7 @@ const Charts = () => {
             <div>
                 <AreaChart/>
                 <BarChart/>
+                <TreeMap/>
             </div>
         </div>
     )
