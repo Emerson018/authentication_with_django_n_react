@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from api.models import User, Consumo_eletrica, Produtos_tecnologia
-from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, ConsumoEletricaSerializer, ProdutosTecnologiaSerializer
+from api.models import User, Consumo_eletrica, Produtos_tecnologia, Top_100_eletrica_2024
+from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, ConsumoEletricaSerializer, ProdutosTecnologiaSerializer, Top100Eletrica2024Serializer
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -55,3 +55,7 @@ def get_max_consumo_estados_sul(request):
 class ProdutosTecnologiaList(generics.ListAPIView):
     queryset = Produtos_tecnologia.objects.all()
     serializer_class = ProdutosTecnologiaSerializer
+
+class Top100Eletrica2024List(generics.ListAPIView):
+    queryset = Top_100_eletrica_2024.objects.all()
+    serializer_class = Top100Eletrica2024Serializer

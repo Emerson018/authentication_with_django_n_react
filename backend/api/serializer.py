@@ -1,4 +1,4 @@
-from api.models import User, Consumo_eletrica, Produtos_tecnologia
+from api.models import User, Consumo_eletrica, Produtos_tecnologia, Top_100_eletrica_2024
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
@@ -67,4 +67,9 @@ class ConsumoEletricaSerializer(serializers.ModelSerializer):
 class ProdutosTecnologiaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Produtos_tecnologia
+        fields = '__all__'
+
+class Top100Eletrica2024Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Top_100_eletrica_2024
         fields = '__all__'

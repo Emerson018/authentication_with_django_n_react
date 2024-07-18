@@ -50,3 +50,13 @@ class Produtos_tecnologia(models.Model):
     tipo_produto = models.CharField(max_length=25)
     marca = models.CharField(max_length=25)
     garantia = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(36)])
+
+#DE JANEIRO ATE JULHO
+class Top_100_eletrica_2024(models.Model):
+    codigo = models.IntegerField(primary_key=True)
+    titulo = models.CharField(max_length=100)
+    gama = models.CharField(max_length=1)
+    vendas = models.IntegerField()
+    margem_bruta = models.FloatField()
+    carrinho_medio = models.FloatField()
+    numero_clientes = models.IntegerField()
