@@ -1,6 +1,6 @@
 import pandas as pd
 
-excel_file = 'C:/Users/Gamer-PC/Downloads/ALURA/Python/Django/asd/authentication_with_django_n_react/backend/api/management/commands/dados_formatados/dados_eletrica_jan_jul.xlsx'
+excel_file = 'C:/Users/Gamer-PC/Downloads/ALURA/Python/Django/asd/authentication_with_django_n_react/backend/api/management/commands/dados_formatados/dados_leroy.xlsx'
 
 
 try:
@@ -10,7 +10,7 @@ try:
     df = df.iloc[1:]
 
     # Selecionar apenas as colunas desejadas
-    colunas_desejadas = ['codigo', 'gama', 'vendas', 'margem_bruta', 'carrinho_medio', 'numero_clientes']
+    colunas_desejadas = ['codigo','titulo', 'gama', 'vendas', 'margem_bruta', 'carrinho_medio', 'numero_clientes']
     df = df[colunas_desejadas]
 
     # Função para limpar e converter valores
@@ -25,7 +25,7 @@ try:
         df[col] = df[col].apply(limpar_valor)
 
     # Salvar o DataFrame resultante em um arquivo CSV
-    csv_file = 'C:/Users/Gamer-PC/Downloads/ALURA/Python/Django/asd/authentication_with_django_n_react/backend/api/management/commands/dados_formatados/arquivo.csv'
+    csv_file = 'C:/Users/Gamer-PC/Downloads/ALURA/Python/Django/asd/authentication_with_django_n_react/backend/api/management/commands/dados_formatados/arquivo_leroy.csv'
     df.to_csv(csv_file, index=False, encoding='utf-8', sep=',')
 
     print(f'Arquivo CSV salvo em: {csv_file}')
