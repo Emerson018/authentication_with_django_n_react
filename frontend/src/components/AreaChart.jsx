@@ -5,7 +5,6 @@ import axios from 'axios';
 
 const GraficoEstadosSul = () => {
     const [dadosConsumo, setDadosConsumo] = useState([]);
-    const [dadosMaxConsumo, setDadosMaxConsumo] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -94,7 +93,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         
         return (
-            <div className="p-3 bg-secondary rounded">
+            <div className="custom-tooltip">
                 <p className="text-medium text-lg">{label}</p>
                 <p className="text-sm text-blue-400">
                     Consumo:

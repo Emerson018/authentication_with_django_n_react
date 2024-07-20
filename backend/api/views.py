@@ -59,3 +59,8 @@ class ProdutosTecnologiaList(generics.ListAPIView):
 class Top100Eletrica2024List(generics.ListAPIView):
     queryset = Top_100_eletrica_2024.objects.all()
     serializer_class = Top100Eletrica2024Serializer
+
+def top_10_vendidos(request):
+    top_10_produtos = Top_100_eletrica_2024.objects.order_by('-vendas')[:10]
+    data = list(top_10_produtos.values('titulo', 'vendas', 'codigo'))
+    return JsonResponse(data, safe=False)

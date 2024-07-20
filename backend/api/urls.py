@@ -9,8 +9,12 @@ urlpatterns = [
     path("register/", views.RegisterView.as_view()),\
     path("test/", views.testEndPoint, name='test'),
     path("consumo-eletrica/", ConsumoEletricaList.as_view(), name='consumo-eletrica-list'),
+
     path("estados-sul/", get_estados_sul, name='get_estados_sul' ),
     path('max-consumo-estados-sul/', get_max_consumo_estados_sul, name='get_max_consumo_estados_sul'),
+
     path("produtos-tecnologia/", ProdutosTecnologiaList.as_view(), name='produtos-tecnologia-list'),
-    path("top-100-eletrica-2024", Top100Eletrica2024List.as_view(), name='top-100-eletrica-2024-list' ),
+
+    path("top-100-eletrica-2024/", Top100Eletrica2024List.as_view(), name='top-100-eletrica-2024-list' ),
+    path("top-10-vendidos/", views.top_10_vendidos, name='top-10-vendidos'),
 ]

@@ -99,7 +99,7 @@ const CustomTooltip = ({ active, payload, label }) => {
         const valorConsumo = payload[0].value;
         const valorFormatado = formatarValor(valorConsumo);
         return (
-            <div className="p-3 bg-secondary rounded">
+            <div className="custom-tooltip">
                 <p className="text-medium text-lg">{label}</p>   
                 <p className="text-sm text-red-400">
                     Consumo:

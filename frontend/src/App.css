@@ -46,3 +46,20 @@
 .tooltip-value {
   margin-left: 0.5rem; /* ml-2 */
 }
+
+.custom-tooltip {
+  background: rgba(0, 0, 0, 0.75); /* Fundo semi-transparente */
+  color: #fff; /* Cor do texto */
+  padding: 10px; /* Espaçamento interno */
+  border-radius: 5px; /* Bordas arredondadas */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+}
+
+.custom-tooltip .label {
+  font-weight: bold;
+}
+
+.custom-tooltip .intro,
+.custom-tooltip .desc {
+  margin: 0;
+}
