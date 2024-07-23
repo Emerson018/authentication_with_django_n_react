@@ -31,7 +31,7 @@ const GraficoLeroyJanJul = () => {
         const fetchData = async () => {
             try {
                 const responseTop10Vendidos = await axios.get('http://localhost:8000/api/top-10-vendidos/');
-                console.log('Dados recebidos:', responseTop10Vendidos.data); // Verifica os dados recebidos
+                console.log('Dados MAIOR VENDA:', responseTop10Vendidos.data); // Verifica os dados recebidos
                 setDadosTop10Vendidos(responseTop10Vendidos.data);
             } catch (error) {
                 console.error('Erro ao importar os dados.', error);

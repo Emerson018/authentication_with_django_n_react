@@ -64,3 +64,12 @@ def top_10_vendidos(request):
     top_10_produtos = Top_100_eletrica_2024.objects.order_by('-vendas')[:10]
     data = list(top_10_produtos.values('titulo', 'vendas', 'codigo'))
     return JsonResponse(data, safe=False)
+
+def top_5_margem(request):
+    top_5_produtos = Top_100_eletrica_2024.objects.order_by('-margem_bruta')[:5]
+    data = [
+        {"name": f"{idx + 1} - {produto['titulo']}", "margem": produto['margem_bruta']}
+        for idx, produto in enumerate(top_5_produtos.values('titulo', 'margem_bruta'))
+    ]
+    return JsonResponse(data, safe=False)
+
