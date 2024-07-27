@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const style = {
     top: '50%',
-    right: 0,
+    right: 300,
     transform: 'translate(0, -50%)',
     lineHeight: '24px',
 };

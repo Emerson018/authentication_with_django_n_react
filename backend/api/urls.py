@@ -18,4 +18,5 @@ urlpatterns = [
     path("top-100-eletrica-2024/", Top100Eletrica2024List.as_view(), name='top-100-eletrica-2024-list' ),
     path("top-10-vendidos/", views.top_10_vendidos, name='top-10-vendidos'),
     path("top-5-margem/", views.top_5_margem, name='top-5-margem'),
+    path("top-gama/", views.top_gama, name='top-gama'),
 ]

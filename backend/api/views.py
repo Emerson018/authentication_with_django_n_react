@@ -10,7 +10,7 @@ from rest_framework import generics, status, viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from django.http import JsonResponse
-from django.db.models import Max, F
+from django.db.models import Max, F, Count
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
@@ -56,6 +56,8 @@ class ProdutosTecnologiaList(generics.ListAPIView):
     queryset = Produtos_tecnologia.objects.all()
     serializer_class = ProdutosTecnologiaSerializer
 
+#Dados elétrica de JANEIRO À JULHO DE 2024
+
 class Top100Eletrica2024List(generics.ListAPIView):
     queryset = Top_100_eletrica_2024.objects.all()
     serializer_class = Top100Eletrica2024Serializer
@@ -73,3 +75,7 @@ def top_5_margem(request):
     ]
     return JsonResponse(data, safe=False)
 
+def top_gama(request):
+    gamas = Top_100_eletrica_2024.objects.values('gama').annotate(count=Count('gama')).order_by('gama')
+    data = list(gamas)
+    return JsonResponse(data, safe=False)
